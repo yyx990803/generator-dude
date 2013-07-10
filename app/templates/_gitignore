@@ -1,0 +1,6 @@
+.DS_Store
+.sass-cache
+node_modules
+components
+static/js
+static/css
