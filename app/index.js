@@ -74,19 +74,27 @@ DudeGenerator.prototype.askFor = function askFor() {
     }
 
     this.prompt(prompts, function (props) {
-        this.appName = props.appName
-        this.internal = props.internal
-        this.static = props.static
 
+        this.appName = props.appName
         this.appengineTasks = ''
         this.nodeTasks = ''
+        this.nodeDeps = ''
 
         if (this.appengine) {
+            this.internal = props.internal
+            this.static = props.static
             this.appengineTasks = this.read('appengine/_tasks.js')
         }
 
         if (this.node) {
             this.nodeTasks = this.read('node/_tasks.js')
+            var nodeDeps = {
+                "express": "~3.3.4",
+                "express3-handlebars": "~0.4.1"
+            }
+            if (props.mongodb) nodeDeps["mongodb"] = "~1.3.11"
+            if (props.redis) nodeDeps["redis"] = "~0.8.4"
+            this.nodeDeps = ('"dependencies": ' + JSON.stringify(nodeDeps, null, 4) + ',').replace(/\n/g, '\n    ')
         }
 
         cb()
@@ -103,7 +111,7 @@ DudeGenerator.prototype.app = function app() {
     this.mkdir('static/css')
     this.mkdir('static/img')
 
-    this.write('client/js/main.js', "document.querySelector('h1').innerHTML = 'It works!'")
+    this.write('client/js/main.js', "document.querySelector('h1').innerHTML = 'Grunt and Component works!'")
     this.write('client/sass/style.sass', 'body\n  font-family: "Helvetica Neue"')
 
     this.template('_package.json', 'package.json')
@@ -123,7 +131,10 @@ DudeGenerator.prototype.app = function app() {
             this.template('appengine/_index.py', 'index.py')
         }
     } else if (this.node) {
-
+        this.mkdir('views/layouts')
+        this.template('node/_app.js', 'app.js')
+        this.template('node/_index.handlebars', 'views/index.handlebars')
+        this.template('node/_main_layout.handlebars', 'views/layouts/main.handlebars')
     }
 }
 
