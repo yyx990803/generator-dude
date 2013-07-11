@@ -3,7 +3,7 @@ var util = require('util'),
     exec = require('child_process').exec,
     yeoman = require('yeoman-generator')
 
-var BasicGenerator = module.exports = function BasicGenerator(args, options, config) {
+var DudeGenerator = module.exports = function DudeGenerator(args, options, config) {
     yeoman.generators.Base.apply(this, arguments)
 
     this.appengine = args[0] === 'appengine'
@@ -27,9 +27,9 @@ var BasicGenerator = module.exports = function BasicGenerator(args, options, con
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')))
 }
 
-util.inherits(BasicGenerator, yeoman.generators.Base)
+util.inherits(DudeGenerator, yeoman.generators.Base)
 
-BasicGenerator.prototype.askFor = function askFor() {
+DudeGenerator.prototype.askFor = function askFor() {
     var cb = this.async()
 
     console.log("\n=== Whatuuuuup, dude! ===\n")
@@ -93,7 +93,7 @@ BasicGenerator.prototype.askFor = function askFor() {
     }.bind(this))
 }
 
-BasicGenerator.prototype.app = function app() {
+DudeGenerator.prototype.app = function app() {
     this.mkdir('client')
     this.mkdir('client/js')
     this.mkdir('client/sass')
@@ -127,7 +127,7 @@ BasicGenerator.prototype.app = function app() {
     }
 }
 
-BasicGenerator.prototype.projectfiles = function projectfiles() {
+DudeGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('_jshintrc', '.jshintrc')
     this.copy('_gitignore', '.gitignore')
 }
