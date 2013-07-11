@@ -1,0 +1,29 @@
+application: <%= (internal ? 'google.com:' : '') + _.slugify(appName) %>
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^client/.*
+- ^node_modules/.*
+- ^components/.*
+- ^Gruntfile\.js
+- ^package\.json
+
+handlers:
+
+- url: /
+  <%= static ? 'static_files: static/index.html\n  upload: static/index.html' : 'script: index.app' %>
+
+- url: /
+  static_dir: static
