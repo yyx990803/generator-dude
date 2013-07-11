@@ -1,4 +1,4 @@
-# Generator-basic
+# Generator-dude
 
 A personal project generator for Yeoman.
 
@@ -15,7 +15,7 @@ A personal project generator for Yeoman.
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
 - Clone this repo, then inside of it, `npm link`
-- In an empty directory run: `yo basic`
+- In an empty directory run: `yo dude` (yeah it's that awesome)
 - After everything is done you should be able to build with `grunt`
 - `grunt watch` will watch files for SASS and Component build.
 
