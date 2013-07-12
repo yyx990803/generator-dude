@@ -2,13 +2,16 @@
 
 A personal project generator for Yeoman.
 
+## Front End Stack
+- [SASS](https://github.com/nex3/sass)
+- [Component](https://github.com/component/component)
+
 ## Usage
-- Make sure you have [yo](https://github.com/yeoman/yo) installed: `npm install -g yo`
+- Make sure you have [yo](https://github.com/yeoman/yo) and [grunt-cli](https://github.com/gruntjs/grunt-cli) installed: `npm install -g yo grunt-cli`
 - Clone this repo, then inside of it, `npm link`
 - In an empty directory run: `yo dude` (yeah it's that awesome)
 - After everything is done you should be able to build with `grunt`
-- `grunt watch` will watch files for SASS and Component build.
-- `grunt dev` will start a development server on 8080, and run `grunt watch` concurrently.
+- `grunt dev` will build everything, start a development server on 8080, and watch file changes for auto rebuild.
 
 ## Includes
 - grunt
