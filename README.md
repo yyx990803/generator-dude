@@ -1,6 +1,7 @@
 # Generator-dude
 
-A personal project generator for Yeoman.
+A personal project generator using [Yeoman](http://yeoman.io).
+This is heavily tailored for my personal needs and preferences, but feel free to fork it.
 
 ## Front End Stack
 - [SASS](https://github.com/nex3/sass)
@@ -8,10 +9,10 @@ A personal project generator for Yeoman.
 
 ## Usage
 - Make sure you have [yo](https://github.com/yeoman/yo) and [grunt-cli](https://github.com/gruntjs/grunt-cli) installed: `npm install -g yo grunt-cli`
-- Clone this repo, then inside of it, `npm link`
+- Clone this repo, place it somewhere nice, then inside of it, `npm link`
 - In an empty directory run: `yo dude` (yeah it's that awesome)
-- After everything is done you should be able to build with `grunt`
-- `grunt dev` will build everything, start a development server on 8080, and watch file changes for auto rebuild.
+- The project is ready to roll. Just `grunt` to build.
+- If you initiated with Node or AppEgine backend (see below), `grunt dev` will build everything, start a development server on 8080, and watch file changes for auto rebuild.
 
 ## Includes
 - grunt
@@ -30,6 +31,7 @@ A personal project generator for Yeoman.
 - express3-handlebars
 - redis (optional)
 - mongodb (optional)
+- .podhook (see [Pod](https://github.com/yyx990803/pod))
 
 ### For Google App Engine
 - `yo dude appengine`
