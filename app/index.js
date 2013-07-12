@@ -131,7 +131,9 @@ DudeGenerator.prototype.app = function app() {
             this.template('appengine/_index.py', 'index.py')
         }
     } else if (this.node) {
+        // Node
         this.mkdir('views/layouts')
+        this.copy('node/_podhook', '.podhook')
         this.template('node/_app.js', 'app.js')
         this.template('node/_index.handlebars', 'views/index.handlebars')
         this.template('node/_main_layout.handlebars', 'views/layouts/main.handlebars')
