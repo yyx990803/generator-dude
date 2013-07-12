@@ -53,7 +53,7 @@ module.exports = function( grunt ) {
                     livereload: true
                 }
             }
-        }
+        }<%= nodeTaskConfigs %>
 
     })
 
@@ -64,5 +64,6 @@ module.exports = function( grunt ) {
 
     grunt.registerTask( 'build', ['sass:build', 'component_build', 'uglify'] )
     grunt.registerTask( 'default', ['build'])
+    
 <%= nodeTasks %><%= appengineTasks %>
 }

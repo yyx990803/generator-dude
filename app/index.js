@@ -88,6 +88,8 @@ DudeGenerator.prototype.askFor = function askFor() {
 
         if (this.node) {
             this.nodeTasks = this.read('node/_tasks.js')
+            this.nodeTaskConfigs = this.read('node/_taskconfigs.js')
+            this.nodeDevDeps = this.read('node/_devdeps.json')
             var nodeDeps = {
                 "express": "~3.3.4",
                 "express3-handlebars": "~0.4.1"
@@ -132,9 +134,11 @@ DudeGenerator.prototype.app = function app() {
         }
     } else if (this.node) {
         // Node
+        this.mkdir('server')
         this.mkdir('views/layouts')
         this.copy('node/_podhook', '.podhook')
-        this.template('node/_app.js', 'app.js')
+        this.copy('node/server/_index.js', 'server/index.js')
+        this.copy('node/_app.js', 'app.js')
         this.template('node/_index.handlebars', 'views/index.handlebars')
         this.template('node/_main_layout.handlebars', 'views/layouts/main.handlebars')
     }
