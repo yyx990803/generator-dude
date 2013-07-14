@@ -98,9 +98,9 @@ DudeGenerator.prototype.app = function app() {
     if (!this.appengine && !this.node) {
         this.template('index.html', 'static/index.html')
     } else if (this.node) {
-        templateDirectory(this, 'node', './')
+        this.directory('node', './')
     } else if (this.appengine) {
-        templateDirectory(this, 'appengine', './')
+        this.directory('appengine', './')
         this.static && this.template('index.html', 'static/index.html')
     }
 }
@@ -108,10 +108,4 @@ DudeGenerator.prototype.app = function app() {
 DudeGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('_jshintrc', '.jshintrc')
     this.copy('_gitignore', '.gitignore')
-}
-
-function templateDirectory (generator, source, destination) {
-    generator.directory(source, destination, function (body) {
-        return generator.engine(body, generator)
-    })
 }
