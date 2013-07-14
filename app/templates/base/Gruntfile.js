@@ -53,7 +53,25 @@ module.exports = function( grunt ) {
                     livereload: true
                 }
             }
-        }<%= nodeTaskConfigs %>
+        }<% if (node) { %>,
+
+        nodemon: {
+            dev: {
+                options: {
+                    file: 'app.js',
+                    watchedFolders: ['server']
+                }
+            }
+        },
+
+        concurrent: {
+            dev: {
+                tasks: ['nodemon:dev', 'watch'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        }<% } %>
 
     })
 
@@ -62,8 +80,36 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-contrib-uglify' )
     grunt.loadNpmTasks( 'grunt-component-build' )
 
+<% if (node) { %>
+    grunt.loadNpmTasks( 'grunt-nodemon' )
+    grunt.loadNpmTasks( 'grunt-concurrent' )
+    grunt.registerTask( 'dev', ['build', 'concurrent:dev'] )
+<% } else if (appengine) { %>
+    grunt.registerTask( 'dev', [ 'build', 'serve', 'watch' ] )
+    grunt.registerTask( 'deploy', [ 'build', 'update' ] )
+
+    grunt.registerTask('serve', 'Start development environment.', function() {
+        grunt.util.spawn({
+            cmd: 'dev_appserver.py',
+            args: ['./app.yaml'],
+            opts: {
+                stdio: 'inherit'
+            }
+        }, function () {})
+    })
+
+    grunt.registerTask('update', 'Deploy to appengine.', function() {
+        grunt.util.spawn({
+            cmd: 'appcfg.py',
+            args: ['--oauth2', 'update', '.'],
+            opts: {
+                stdio: 'inherit'
+            }
+        }, function () {})
+    })
+<% } %>
+
     grunt.registerTask( 'build', ['sass:build', 'component_build', 'uglify'] )
     grunt.registerTask( 'default', ['build'])
     
-<%= nodeTasks %><%= appengineTasks %>
 }
