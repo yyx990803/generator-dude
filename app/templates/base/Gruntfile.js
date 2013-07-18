@@ -36,21 +36,18 @@ module.exports = function( grunt ) {
         },
 
         watch: {
-
-            component: {
-                files: ['client/js/**/*.js'],
-                tasks: 'component_build',
-                options: {
-                    nospawn: true
-                }
+            options: {
+                livereload: true
             },
-
+            component: {
+                files: ['client/js/**/*.js', 'component.json'],
+                tasks: 'component_build'
+            },
             sass: {
                 files: ['client/sass/**/*.sass'],
                 tasks: 'sass:dev',
                 options: {
-                    nospawn: true,
-                    livereload: true
+                    nospawn: true
                 }
             }
         }<% if (node) { %>,
@@ -71,6 +68,15 @@ module.exports = function( grunt ) {
                     logConcurrentOutput: true
                 }
             }
+        }<% } %><% if (basic || static) { %>,
+
+        connect: {
+            dev: {
+                options: {
+                    port: 8080,
+                    base: 'static'
+                }
+            }
         }<% } %>
 
     })
@@ -84,24 +90,16 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-nodemon' )
     grunt.loadNpmTasks( 'grunt-concurrent' )
     grunt.registerTask( 'dev', ['build', 'concurrent:dev'] )
-<% } else if (appengine) { %>
+<% } else if (basic || static) { %>
+    grunt.loadNpmTasks( 'grunt-contrib-connect' )
+    grunt.registerTask( 'dev', ['build', 'connect', 'watch'] )
+<% } else { %>
     grunt.registerTask( 'dev', [ 'build', 'serve', 'watch' ] )
     grunt.registerTask( 'deploy', [ 'build', 'update' ] )
-
     grunt.registerTask('serve', 'Start development environment.', function() {
         grunt.util.spawn({
             cmd: 'dev_appserver.py',
             args: ['./app.yaml'],
-            opts: {
-                stdio: 'inherit'
-            }
-        }, function () {})
-    })
-
-    grunt.registerTask('update', 'Deploy to appengine.', function() {
-        grunt.util.spawn({
-            cmd: 'appcfg.py',
-            args: ['--oauth2', 'update', '.'],
             opts: {
                 stdio: 'inherit'
             }

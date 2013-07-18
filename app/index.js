@@ -8,6 +8,7 @@ var DudeGenerator = module.exports = function DudeGenerator(args, options, confi
 
     this.appengine = args[0] === 'appengine'
     this.node = args[0] === 'node'
+    this.basic = !(this.appengine || this.node)
 
     this.on('end', function () {
         var yo = this
