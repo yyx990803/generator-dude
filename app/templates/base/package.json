@@ -12,9 +12,9 @@
         "grunt-contrib-watch": "~0.4.4",
         "grunt-contrib-sass": "~0.4.1",
         "grunt-component-build": "~0.3.0",
-        "grunt-contrib-uglify": "~0.2.2"<% if (node) { %>,
+        "grunt-contrib-uglify": "~0.2.2"<% if (basic) { %>,
+        "grunt-contrib-connect": "~0.3.0"<% } if (node) { %>,
         "grunt-nodemon": "~0.0.7",
-        "grunt-concurrent": "~0.3.0"<% } %><% if (basic || static) { %>,
-        "grunt-contrib-connect": "~0.3.0"<% } %>
+        "grunt-concurrent": "~0.3.0"<% } %>
     }
 }

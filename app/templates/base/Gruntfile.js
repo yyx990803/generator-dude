@@ -50,7 +50,16 @@ module.exports = function( grunt ) {
                     nospawn: true
                 }
             }
-        }<% if (node) { %>,
+        }<% if (basic) { %>,
+
+        connect: {
+            dev: {
+                options: {
+                    port: 8080,
+                    base: 'static'
+                }
+            }
+        }<% } %><% if (node) { %>,
 
         nodemon: {
             dev: {
@@ -68,15 +77,6 @@ module.exports = function( grunt ) {
                     logConcurrentOutput: true
                 }
             }
-        }<% } %><% if (basic || static) { %>,
-
-        connect: {
-            dev: {
-                options: {
-                    port: 8080,
-                    base: 'static'
-                }
-            }
         }<% } %>
 
     })
@@ -86,14 +86,14 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-contrib-uglify' )
     grunt.loadNpmTasks( 'grunt-component-build' )
 
-<% if (node) { %>
+<% if (basic) { %>
+    grunt.loadNpmTasks( 'grunt-contrib-connect' )
+    grunt.registerTask( 'dev', ['build', 'connect', 'watch'] )
+<% } else if (node) { %>
     grunt.loadNpmTasks( 'grunt-nodemon' )
     grunt.loadNpmTasks( 'grunt-concurrent' )
     grunt.registerTask( 'dev', ['build', 'concurrent:dev'] )
-<% } else if (basic || static) { %>
-    grunt.loadNpmTasks( 'grunt-contrib-connect' )
-    grunt.registerTask( 'dev', ['build', 'connect', 'watch'] )
-<% } else { %>
+<% } else if (appengine) { %>
     grunt.registerTask( 'dev', [ 'build', 'serve', 'watch' ] )
     grunt.registerTask( 'deploy', [ 'build', 'update' ] )
     grunt.registerTask('serve', 'Start development environment.', function() {

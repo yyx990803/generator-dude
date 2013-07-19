@@ -12,7 +12,8 @@ This is heavily tailored for my personal needs and preferences, but feel free to
 - Clone this repo, place it somewhere nice, then inside of it, `npm link`
 - In an empty directory run: `yo dude` (yeah it's that awesome)
 - The project is ready to roll. Just `grunt` to build.
-- If you initiated with Node or AppEgine backend (see below), `grunt dev` will build everything, start a development server on 8080, and watch file changes for auto rebuild.
+- `grunt dev` will build everything, start a development server on 8080, and watch file changes for auto rebuild static assets / restart node process.
+- Pair with LiveReload browser extension for instant reload awesomeness
 
 ## Includes
 - grunt
@@ -35,7 +36,6 @@ This is heavily tailored for my personal needs and preferences, but feel free to
 
 ### For Google App Engine
 - `yo dude appengine`
-- deploy with `grunt deploy` (which runs `appcfp.py update .`)
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
