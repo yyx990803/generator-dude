@@ -23,7 +23,8 @@ module.exports = function( grunt ) {
                 output: './static/js/',
                 styles: false,
                 scripts: true,
-                verbose: true
+                verbose: true,
+                standalone: true
             }
         },
 

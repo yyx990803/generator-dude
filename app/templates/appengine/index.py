@@ -8,7 +8,7 @@ class MainHandler( webapp2.RequestHandler ):
         self.response.headers['Content-Type'] = 'text/html'
         tmpl = os.path.join( os.path.dirname(__file__), 'templates/index.tmpl' )
         tmplvars = {
-            'title': '<%= appName %>'
+            'msg': 'AppEngine works!'
         }
         self.response.out.write( template.render( tmpl, tmplvars ) )
 
