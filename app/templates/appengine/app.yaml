@@ -19,6 +19,8 @@ skip_files:
 - ^components/.*
 - ^Gruntfile\.js
 - ^package\.json
+- ^component\.json
+- ^TODO.*
 
 handlers:
 
