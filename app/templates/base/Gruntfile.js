@@ -28,6 +28,15 @@ module.exports = function( grunt ) {
             }
         },
 
+        jshint: {
+            build: {
+                src: ['client/js/**/*.js'<% if (node) { %>, 'server/**/*.js'<% } %>],
+                options: {
+                    jshintrc: './.jshintrc'
+                }
+            }
+        },
+
         uglify: {
             build: {
                 files: {
@@ -85,8 +94,8 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-contrib-watch' )
     grunt.loadNpmTasks( 'grunt-contrib-sass' )
     grunt.loadNpmTasks( 'grunt-contrib-uglify' )
+    grunt.loadNpmTasks( 'grunt-contrib-jshint' )
     grunt.loadNpmTasks( 'grunt-component-build' )
-
 <% if (basic) { %>
     grunt.loadNpmTasks( 'grunt-contrib-connect' )
     grunt.registerTask( 'dev', ['build', 'connect', 'watch'] )
@@ -107,8 +116,7 @@ module.exports = function( grunt ) {
         }, function () {})
     })
 <% } %>
-
-    grunt.registerTask( 'build', ['sass:build', 'component_build', 'uglify'] )
+    grunt.registerTask( 'build', ['sass:build', 'component_build', 'jshint', 'uglify'] )
     grunt.registerTask( 'default', ['build'])
     
 }
