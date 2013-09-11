@@ -20,7 +20,7 @@
     "url": "git://github.com/yyx990803/generator-dude.git"
   },
   "dependencies": {
-    "yeoman-generator": "~0.12.0"
+    "yeoman-generator": "~0.13.4"
   },
   "engines": {
     "node": ">=0.8.0"
