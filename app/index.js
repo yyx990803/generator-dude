@@ -101,8 +101,13 @@ DudeGenerator.prototype.app = function app() {
     } else if (this.node) {
         this.directory('node', './')
     } else if (this.appengine) {
-        this.directory('appengine', './')
-        this.static && this.template('index.html', 'static/index.html')
+        this.template('appengine/app.yaml', 'app.yaml')
+        if (this.static) {
+            this.template('index.html', 'static/index.html')
+        } else {
+            this.template('appengine/index.py', 'index.py')
+            this.directory('appengine/templates', 'templates')
+        }
     }
 }
 
