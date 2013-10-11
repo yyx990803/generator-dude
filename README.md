@@ -20,6 +20,7 @@ This is heavily tailored for my personal needs and preferences, but feel free to
 - grunt-contrib-watch
 - grunt-contrib-sass
 - grunt-contrib-uglify
+- grunt-contrib-jshint
 - grunt-component-build
 - .gitignore
 - .jshintrc
