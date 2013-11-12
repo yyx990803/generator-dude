@@ -18,13 +18,13 @@ module.exports = function( grunt ) {
             } 
         },
 
-        component_build: {
+        componentbuild: {
             build: {
-                output: './static/js/',
-                styles: false,
-                scripts: true,
-                verbose: true,
-                standalone: true
+                options: {
+                    standalone: true,   
+                },
+                src: '.',
+                dest: 'static/js'
             }
         },
 
@@ -51,7 +51,7 @@ module.exports = function( grunt ) {
             },
             component: {
                 files: ['client/js/**/*.js', 'component.json'],
-                tasks: 'component_build'
+                tasks: 'componentbuild'
             },
             sass: {
                 files: ['client/sass/**/*.sass'],
@@ -116,7 +116,7 @@ module.exports = function( grunt ) {
         }, function () {})
     })
 <% } %>
-    grunt.registerTask( 'build', ['sass:build', 'component_build', 'jshint', 'uglify'] )
+    grunt.registerTask( 'build', ['sass:build', 'componentbuild', 'jshint', 'uglify'] )
     grunt.registerTask( 'default', ['build'])
     
 }

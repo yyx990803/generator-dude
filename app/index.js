@@ -94,7 +94,7 @@ DudeGenerator.prototype.askFor = function askFor() {
 
 DudeGenerator.prototype.app = function app() {
     
-    this.directory('base', './')
+    this.directory('shared', './')
 
     if (!this.appengine && !this.node) {
         this.template('index.html', 'static/index.html')
