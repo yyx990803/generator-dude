@@ -106,14 +106,27 @@ module.exports = function( grunt ) {
 <% } else if (appengine) { %>
     grunt.registerTask( 'dev', [ 'build', 'serve', 'watch' ] )
     grunt.registerTask( 'deploy', [ 'build', 'update' ] )
+
+    grunt.registerTask('update', 'Update to Appengine.', function () {
+        var done = this.async()
+        grunt.util.spawn({
+            cmd: 'appcfg.py',
+            args: ['--oauth2', 'update','.'],
+            opts: {
+                stdio: 'inherit'
+            }
+        }, done)
+    })
+
     grunt.registerTask('serve', 'Start development environment.', function() {
+        var done = this.async()
         grunt.util.spawn({
             cmd: 'dev_appserver.py',
             args: ['./app.yaml'],
             opts: {
                 stdio: 'inherit'
             }
-        }, function () {})
+        }, done)
     })
 <% } %>
     grunt.registerTask( 'build', ['sass:build', 'componentbuild', 'jshint', 'uglify'] )
