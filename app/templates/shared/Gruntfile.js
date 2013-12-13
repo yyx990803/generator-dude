@@ -2,20 +2,12 @@ module.exports = function( grunt ) {
 
     grunt.initConfig({
 
-        sass: {
+        stylus: {
             build: {
-                options: {
-                    style: 'compressed'
-                },
                 files: { 
-                    'static/css/style.css': 'client/sass/style.sass'
+                    'static/css/style.css': 'client/stylus/style.styl'
                 }
-            },
-            dev: {
-                files: {
-                    'static/css/style.css': 'client/sass/style.sass'
-                }
-            } 
+            }
         },
 
         componentbuild: {
@@ -53,9 +45,9 @@ module.exports = function( grunt ) {
                 files: ['client/js/**/*.js', 'component.json'],
                 tasks: 'componentbuild'
             },
-            sass: {
-                files: ['client/sass/**/*.sass'],
-                tasks: 'sass:dev',
+            stylus: {
+                files: ['client/stylus/**/*.styl'],
+                tasks: 'stylus',
                 options: {
                     nospawn: true
                 }
@@ -92,7 +84,7 @@ module.exports = function( grunt ) {
     })
 
     grunt.loadNpmTasks( 'grunt-contrib-watch' )
-    grunt.loadNpmTasks( 'grunt-contrib-sass' )
+    grunt.loadNpmTasks( 'grunt-contrib-stylus' )
     grunt.loadNpmTasks( 'grunt-contrib-uglify' )
     grunt.loadNpmTasks( 'grunt-contrib-jshint' )
     grunt.loadNpmTasks( 'grunt-component-build' )
@@ -129,7 +121,7 @@ module.exports = function( grunt ) {
         }, done)
     })
 <% } %>
-    grunt.registerTask( 'build', ['sass:build', 'componentbuild', 'jshint', 'uglify'] )
+    grunt.registerTask( 'build', ['stylus', 'componentbuild', 'jshint', 'uglify'] )
     grunt.registerTask( 'default', ['build'])
     
 }
